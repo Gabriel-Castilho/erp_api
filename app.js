@@ -11,7 +11,7 @@ app.use(routes);
 
 
 app.get("/",(req,res)=>{
-    return res.json("hello")
+  res.send("hello")
 })
 
 module.exports=app;
