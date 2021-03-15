@@ -5,46 +5,57 @@ const agendamentoRouter = Router();
 
 
 agendamentoRouter.get("/", async (req, res) => {
- // const result = await runQuery("SELECT * FROM public.", null);
- // res.json(result);
+ const result = await runQuery("SELECT * FROM public.agendamento", null);
+ res.json(result);
 });
+
+
+/*
+arrumar o agendamento
+buscar também o agendamento e não o cliente agendado 
+*/
 
 agendamentoRouter.get("/:id", async (req, res) => {
- // const { id } = req.params;
- /// const result = await runQuery("SELECT * FROM public. WHERE id = $1", [id]);
-//  res.json(result);
+ const { id } = req.params;
+ const result = await runQuery("SELECT * FROM public.agendamento WHERE id_agendamento = $1", [id]);
+ res.json(result);
 });
 
-agendamentoRouter.post("/", async (req, res) => {
-  //const { idCliente } = req.body;
- // const { time } = req.body;
- // const { date } = req.body;
- // const { idServico } = req.body;
 
-  //const result = await runQuery(
-  //  "INSERT INTO public. (idCliente, time, date, idServico, idtipocontato) VALUES($1,$2,$3,$4);",
- //   [idCliente, time, date, idServico]
- // );
- // res.json(result);
+
+agendamentoRouter.post("/", async (req, res) => {
+  const { idCliente} = req.body;
+  const { horario } = req.body;
+   const { data_atendimento } = req.body;
+  const { id_servico } = req.body;
+  const { adicional } = req.body;
+
+  const result = await runQuery(
+    "INSERT INTO public.agendamneto (id_clientes, horario, data_atendimento, id_servico, adicional) VALUES($1,$2,$3,$4,$5);",
+    [idCliente, horario, data_atendimento, id_servico,adicional]
+  );
+  res.json(result);
 });
 
 agendamentoRouter.delete("/:id", async (req, res) => {
-//  const { id } = req.params;
-//  const result = await runQuery("DELETE FROM public. WHERE idcontato=$1", [id]);
- // res.json(result);
+ const { id } = req.params;
+ const result = await runQuery("DELETE FROM public.agendamento WHERE id_agendamento=$1", [id]);
+ res.json(result);
 });
 
 agendamentoRouter.patch("/:id", async (req, res) => {
- // const { idCliente } = req.params;
- // const { time } = req.body;
- // const { date } = req.body;
- // const { idServico } = req.body;
+ const{id_agendamento} = req.params;
+  const { id_cliente } = req.body;
+ const { horario } = req.body;
+ const { data_atendimento } = req.body;
+ const { id_servico } = req.body;
+ const{adicional}=req.body;
 
 
- // const result = await runQuery(
-   // "UPDATE public. SET id Cliente=$1, time=$2, date=$3, idServico=$4 WHERE idcontato=$6;",
-   // [idCliente, time, date, idServico]);
-  // res.json(result);
+ const result = await runQuery(
+    "UPDATE public. SET id_cliente=$1, horario=$2, data_atendimento=$3, id_servico=$4, adicional=$5 WHERE id_agendamento=$6;",
+    [id_cliente, horario, data_atendimento, id_servico,adicional,id_agendamento]);
+   res.json(result);
 });
 
 module.exports = agendamentoRouter;

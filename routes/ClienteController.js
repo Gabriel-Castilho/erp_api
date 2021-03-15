@@ -24,14 +24,14 @@ clienteRouter.post("/", async (req, res) => {
 
 clienteRouter.delete("/:id", async (req, res) => {
   const { id } = req.params;
-  const result = await runQuery("DELETE FROM public.clientes WHERE id=$1", [id]);
+  const result = await runQuery("DELETE FROM public.clientes WHERE id_clientes=$1", [id]);
   res.json(result);
 });
 
 clienteRouter.patch("/:id", async (req, res) => {
   const { nome, telefone } = req.body;
   const { id } = req.params;
-  const result = await runQuery("UPDATE public.clientes SET nome_clientes=$1, telefone=$2 WHERE idcontato=$3;", [nome, telefone, id]);
+  const result = await runQuery("UPDATE public.clientes SET nome_clientes=$1, telefone=$2 WHERE id_clientes=$3;", [nome, telefone, id]);
   res.json(result);
 });
 
