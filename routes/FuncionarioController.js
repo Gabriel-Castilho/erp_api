@@ -1,4 +1,4 @@
-const { Router } = require("express");
+/* const { Router } = require("express");
 const { runQuery } = require("../db");
 
 const funcionarioRouter = Router();
@@ -36,3 +36,5 @@ funcionarioRouter.patch("/:id", async (req, res) => {
 });
 
 module.exports = funcionarioRouter;
+
+*/
