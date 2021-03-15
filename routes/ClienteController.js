@@ -10,7 +10,7 @@ clienteRouter.get("/", async (req, res) => {
 
 clienteRouter.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const result = await runQuery("SELECT * FROM public.clientes WHERE id = $1", [id]);
+  const result = await runQuery("SELECT * FROM public.clientes WHERE id_clientes = $1", [id]);
   res.json(result);
 });
 
