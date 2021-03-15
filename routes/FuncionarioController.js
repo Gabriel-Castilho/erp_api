@@ -4,13 +4,13 @@ const { runQuery } = require("../Database/index");
 const funcionarioRouter = Router();
 
 funcionarioRouter.get("/", async (req, res) => {
-  const result = await runQuery("SELECT * FROM public.funcionario", null);
+  const result = await runQuery("SELECT * FROM public.funcionarios", null);
   res.json(result);
 });
 
 funcionarioRouter.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const result = await runQuery("SELECT * FROM public.funcionario WHERE id_funcionarios = $1", [id]);
+  const result = await runQuery("SELECT * FROM public.funcionarios WHERE id_funcionarios = $1", [id]);
   res.json(result);
 });
 
