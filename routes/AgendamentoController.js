@@ -34,7 +34,7 @@ agendamentoRouter.delete("/:id", async (req, res) => {
  // res.json(result);
 });
 
-contatoRouter.patch("/:id", async (req, res) => {
+agendamentoRouter.patch("/:id", async (req, res) => {
  // const { idCliente } = req.params;
  // const { time } = req.body;
  // const { date } = req.body;
