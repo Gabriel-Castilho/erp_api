@@ -12,7 +12,7 @@ const routes = Router();
 routes.use("/agendamento", agendamentoRouter)
 routes.use("/cliente",clienteRouter)
 routes.use("/despesas",despesasRouter)
-routes.use("servicos",servicoRouter)
+routes.use("/servicos", servicoRouter)
 routes.use("/funcionarios",funcionarioRouter)
 
 module.exports = routes
