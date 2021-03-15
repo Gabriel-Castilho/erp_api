@@ -33,4 +33,4 @@ servicoRouter.patch("/:id", async (req, res) => {
    res.json(result);
 });
 
-module.exports = servicosRouter;
+module.exports = servicoRouter;
