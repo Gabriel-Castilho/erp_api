@@ -4,8 +4,8 @@ const { runQuery } = require("../Database/index");
 const clienteRouter = Router();
 
 clienteRouter.get("/", async (req, res) => {
- // const result = await runQuery("SELECT * FROM public.", null);
-  //res.json(result);
+ const result = await runQuery("SELECT id_clientes, nome_clientes, telefone FROM public.clientes;", null);
+  res.json(result);
 });
 
 clienteRouter.get("/:id", async (req, res) => {
