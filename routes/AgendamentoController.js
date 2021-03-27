@@ -10,11 +10,6 @@ agendamentoRouter.get("/", async (req, res) => {
 });
 
 
-/*
-arrumar o agendamento
-buscar também o agendamento e não o cliente agendado 
-*/
-
 agendamentoRouter.get("/:id", async (req, res) => {
  const { id } = req.params;
  const result = await runQuery("SELECT * FROM public.agendamento WHERE id_agendamento = $1", [id]);
