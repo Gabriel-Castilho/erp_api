@@ -9,5 +9,31 @@ clienteRouter.get("/",async (req,res)=>{
     return res.json(items)
 })
 
+clienteRouter.post("/",async(req,res)=>{
+    const nome = req.body.name
+    const telefone = req.body.telefone
+    const items = await clienteController.create(nome,telefone)
+    return res.json(items)
+})
+
+clienteRouter.delete("/:id",async(req,res)=>{
+    var id = req.params
+    const items = await clienteController.delete(id)
+    return res.json(items)
+})
+
+clienteRouter.get("/:id"),async(req,res)=>{
+    var id = req.params
+    const items = await clienteController.getId(id)
+    return res.json(items)
+}
+
+clienteRouter.patch("/:id",async(req,res)=>{
+    var id = req.params
+    var nome = req.body.name
+    var telefone = req.body.telefone
+    const items = await clienteController.update(nome,telefone,id)
+    return res.json(items)
+})
 
 module.exports=clienteRouter
