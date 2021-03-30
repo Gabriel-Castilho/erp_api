@@ -1,5 +1,29 @@
 const { Router } = require("express");
-const { runQuery } = require("../Database/index");
+const { runQuery } = require("../../Database/index");
+const {Client}=require("pg");
+const { response } = require("../../../FrontApiTG/app");
+
+class ClienteController{
+  async index(){
+    try{
+      const client = new Client({
+        connectionString:process.env.DATABASE_URL,
+        ssl:{
+          rejectUnauthorized:false
+        },
+      });
+      client.connect();
+      const result = await client.query("SELECT * FROM public.clientes;");
+      client.end();
+      const results = result.rows;
+      return results;
+    }catch(err){
+      return response.json(err)
+    }
+  }
+}
+
+
 
 const clienteRouter = Router();
 

@@ -1,7 +1,7 @@
 const {Router} = require("express")
 
 const agendamentoRouter = require("./AgendamentoController")
-const clienteRouter = require("./ClienteController")
+const clienteRouter = require("./cliente.routes")
 const funcionarioRouter = require("./FuncionarioController")
 const servicoRouter = require("./ServicoController")
 const despesasRouter = require ("./DespesasController")

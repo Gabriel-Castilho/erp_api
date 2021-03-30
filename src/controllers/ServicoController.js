@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { runQuery } = require("../Database/index");
+const { runQuery } = require("../../Database/index");
 
 const servicoRouter = Router();
 
