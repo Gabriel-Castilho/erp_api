@@ -23,7 +23,7 @@ clienteRouter.delete("/:id",async(req,res)=>{
 })
 
 clienteRouter.get("/:id"),async(req,res)=>{
-    var id = req.params
+    var id = req.params.id
     const items = await clienteController.getId(id)
     return res.json(items)
 }
