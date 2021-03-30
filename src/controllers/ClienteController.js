@@ -1,7 +1,6 @@
-const { Router } = require("express");
-const { runQuery } = require("../../Database/index");
+
 const {Client}=require("pg");
-const { response } = require("../../../FrontApiTG/app");
+
 
 class ClienteController{
   async index(){
@@ -23,11 +22,9 @@ class ClienteController{
   }
 }
 
+module.exports = ClienteController;
 
-
-const clienteRouter = Router();
-
-clienteRouter.get("/", async (req, res) => {
+/*clienteRouter.get("/", async (req, res) => {
   const result = await runQuery("SELECT id_clientes, nome_clientes, telefone FROM public.clientes;", null);
   res.json(result);
 });
@@ -59,4 +56,4 @@ clienteRouter.patch("/:id", async (req, res) => {
   res.json(result);
 });
 
-module.exports = clienteRouter;
+module.exports = clienteRouter;*/
