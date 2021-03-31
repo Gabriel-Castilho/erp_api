@@ -10,20 +10,19 @@ clienteRouter.get("/",async (req,res)=>{
 })
 
 clienteRouter.post("/",async(req,res)=>{
-    const nome = req.body.name
-    const telefone = req.body.telefone
+    const{nome,telefone} = req.body
     const items = await clienteController.create(nome,telefone)
     return res.json(items)
 })
 
 clienteRouter.delete("/:id",async(req,res)=>{
-    var id = req.params
+    const {id} = req.params
     const items = await clienteController.delete(id)
     return res.json(items)
 })
 
 clienteRouter.get("/:id"),async(req,res)=>{
-    var id = req.params.id
+    const {id}= req.params
     const items = await clienteController.getId(id)
     return res.json(items)
 }

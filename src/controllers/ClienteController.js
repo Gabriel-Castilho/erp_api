@@ -8,7 +8,7 @@ class ClienteController{
       const client = new Client({
         connectionString:process.env.DATABASE_URL,
         ssl:{
-          rejectUnauthorized:false
+          rejectUnauthorized: process.env.DATABASE_URL ? true : false
         },
       });
       client.connect();
@@ -17,7 +17,7 @@ class ClienteController{
       const results = result.rows;
       return results;
     }catch(err){
-      return response.json(err)
+      console.log(err)
     }
   }
 
@@ -36,9 +36,16 @@ class ClienteController{
       const result = await client.query("INSERT INTO public.clientes (nome_clientes, telefone) VALUES($1,$2);", [nome, telefone]);
       client.end();
       const results = result.rows;
-      return results;
+      const response = {
+        message:"cadastrado"
+      }
+      return response;
     }catch(err){
-      return response.json(err)
+      console.error(err)
+      const response={
+        message:"erro"
+      }
+      return response;
     }
   }
 
@@ -72,9 +79,16 @@ class ClienteController{
       const result = await client.query("SELECT * FROM public.clientes WHERE id_clientes = $1", [id]);
       client.end();
       const results = result.rows;
-      return results;
+      const response = {
+        message:"achou"
+      }
+      return response;
     }catch(err){
-      return response.json(err)
+      console.error(err)
+      const response={
+        message:"erro"
+      }
+      return response;
     }
   }
 
