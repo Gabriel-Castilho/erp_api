@@ -17,7 +17,7 @@ class ClienteController{
       return results;
     }catch(err){
       console.error(err)
-      return response.json(err)
+      return res.json(err)
     }
   }
 
@@ -61,7 +61,7 @@ class ClienteController{
       const results = result.rows;
       return results;
     }catch(err){
-      return response.json(err)
+      return res.json(err)
     }
   }
 
@@ -102,12 +102,17 @@ class ClienteController{
       const result = await client.query("UPDATE public.clientes SET nome_clientes=$1, telefone=$2 WHERE id_clientes=$3;", [nome, telefone, id]);
       client.end();
       const results = result.rows;
-      return results;
+      const response = {
+        message:"atualizou"
+      }
+      return response;
     }catch(err){
-      return response.json(err)
+      console.error(err)
+      const response={
+        message:"erro"
+      }
+      return response;
     }
-  }
-}
 
 module.exports = ClienteController;
 
