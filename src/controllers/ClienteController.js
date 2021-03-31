@@ -65,7 +65,7 @@ class ClienteController{
     }
   }
 
-  async getId(id){
+  async getId(id_clientes){
     try{
       const client = new Client({
         connectionString:process.env.DATABASE_URL,
@@ -74,7 +74,7 @@ class ClienteController{
         },
       });
       client.connect();
-      const result = await client.query("SELECT * FROM public.clientes WHERE id_clientes=$1", [id]);
+      const result = await client.query("SELECT * FROM public.clientes WHERE id_clientes=$1", [id_clientes]);
       client.end();
       const results = result.rows;
       const response = {
