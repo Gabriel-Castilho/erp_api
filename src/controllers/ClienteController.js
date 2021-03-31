@@ -31,7 +31,7 @@ class ClienteController{
         },
       });
       client.connect();
-      const result = await client.query("INSERT INTO public.clientes (nome_clientes, telefone) VALUES($1,$2);", [nome, telefone]);
+      const result = await client.query("INSERT INTO public.clientes (nome_clientes, telefone) VALUES($1,$2);", [nome_clientes, telefone]);
       client.end();
       const results = result.rows;
       const response = {
