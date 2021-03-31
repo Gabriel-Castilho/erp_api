@@ -22,7 +22,7 @@ class ClienteController{
   }
 
 
-  async create(nome,telefone){
+  async create(nome_clientes,telefone){
     try{
       const client = new Client({
         connectionString:process.env.DATABASE_URL,

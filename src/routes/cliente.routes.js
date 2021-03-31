@@ -10,8 +10,8 @@ clienteRouter.get("/",async (req,res)=>{
 })
 
 clienteRouter.post("/",async(req,res)=>{
-    const{nome,telefone} = req.body
-    const items = await clienteController.create(nome,telefone)
+    const{nome_clientes,telefone} = req.body
+    const items = await clienteController.create(nome_clientes,telefone)
     return res.json(items)
 })
 
