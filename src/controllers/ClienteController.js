@@ -74,7 +74,7 @@ class ClienteController{
         },
       });
       client.connect();
-      const result = await client.query("SELECT * FROM public.clientes WHERE id_clientes = $1", [id]);
+      const result = await client.query("SELECT * FROM public.clientes WHERE id_clientes=$1", [id]);
       client.end();
       const results = result.rows;
       const response = {
