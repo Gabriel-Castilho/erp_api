@@ -30,9 +30,8 @@ clienteRouter.get("/:id"),async(req,res)=>{
 }
 
 clienteRouter.patch("/:id",async(req,res)=>{
-    var id = req.params
-    var nome = req.body.name
-    var telefone = req.body.telefone
+    const {id} = req.params
+    const {nome,telefone} = req.body
     const items = await clienteController.update(nome,telefone,id)
     return res.json(items)
 })
