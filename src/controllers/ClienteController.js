@@ -8,7 +8,7 @@ class ClienteController{
         connectionString:process.env.DATABASE_URL,
         ssl:{
           rejectUnauthorized: false
-        },
+        }, 
       });
       client.connect();
       const result = await client.query("SELECT * FROM public.clientes;");
@@ -31,8 +31,6 @@ class ClienteController{
         },
       });
       client.connect();
-      const { nome } = req.body;
-      const { telefone } = req.body;
       const result = await client.query("INSERT INTO public.clientes (nome_clientes, telefone) VALUES($1,$2);", [nome, telefone]);
       client.end();
       const results = result.rows;
