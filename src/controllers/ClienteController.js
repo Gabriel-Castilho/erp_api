@@ -1,4 +1,3 @@
-
 const {Client}=require("pg");
 
 
@@ -17,7 +16,8 @@ class ClienteController{
       const results = result.rows;
       return results;
     }catch(err){
-      console.log(err)
+      console.error(err)
+      return response.json(err)
     }
   }
 
