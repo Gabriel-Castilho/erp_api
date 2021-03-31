@@ -103,7 +103,7 @@ class ClienteController{
       client.end();
       const results = result.rows;
       const response = {
-        message:"atualizou"
+        message:"cadastrado"
       }
       return response;
     }catch(err){
@@ -113,6 +113,8 @@ class ClienteController{
       }
       return response;
     }
+  }
+}
 
 module.exports = ClienteController;
 
