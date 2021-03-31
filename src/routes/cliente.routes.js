@@ -17,7 +17,8 @@ clienteRouter.post("/",async(req,res)=>{
 
 clienteRouter.delete("/:id",async(req,res)=>{
     const {id} = req.params
-    const items = await clienteController.delete(id)
+    idNumber = parseInt(id)
+    const items = await clienteController.delete(idNumber)
     return res.json(items)
 })
 
