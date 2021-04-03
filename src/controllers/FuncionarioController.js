@@ -1,38 +1,117 @@
-const { Router } = require("express");
-const { runQuery } = require("../Database/index");
+const { Client } = require("pg")
 
-const funcionarioRouter = Router();
 
-funcionarioRouter.get("/", async (req, res) => {
-  const result = await runQuery("SELECT * FROM public.funcionarios", null);
-  res.json(result);
-});
+class FuncionarioController {
 
-funcionarioRouter.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  const result = await runQuery("SELECT * FROM public.funcionarios WHERE id_funcionarios = $1", [id]);
-  res.json(result);
-});
+  async index() {
+    try {
+      const client = new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+          rejectUnauthorized: false
+        },
+      });
+      client.connect();
+      const result = await client.query("SELECT * FROM public.funcionarios");
+      client.end();
+      const results = result.rows;
+      return results;
+    } catch (err) {
+      console.error(err)
+      return res.json(err)
+    }
+  }
+  async create(nome_funcionario, telefone) {
+    try {
+      const client = new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+          rejectUnauthorized: false
+        },
+      });
+      client.connect();
+      const result = await client.query("INSERT INTO public.funcionarios (nome_funcionario, telefone) VALUES($1,$2);", [nome_funcionario, telefone]);
+      client.end();
+      const results = result.rows;
+      const response = {
+        message: "cadastrado"
+      }
+      return response;
+    } catch (err) {
+      console.error(err)
+      const response = {
+        message: "erro"
+      }
+      return response;
+    }
+  }
 
-funcionarioRouter.post("/", async (req, res) => {
-  const { nome_funcionario } = req.body;
-  const { telefone } = req.body;
+  async delete(id) {
+    try {
+      const client = new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+          rejectUnauthorized: false
+        },
+      });
+      client.connect();
+      const result = await client.query("DELETE FROM public.funcionarios WHERE id_funcionarios=$1", [id]);
+      client.end();
+      const results = result.rows;
+      return results;
+    } catch (err) {
+      return res.json(err)
+    }
+  }
+  async update(nome_funcionario, telefone, id) {
+    try {
+      const client = new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+          rejectUnauthorized: false
+        },
+      });
+      client.connect();
+      const result = await client.query("UPDATE public.funcionario SET nome_funcionario=$1, telefone=$2 WHERE idcontato=$3;", [nome_funcionario, telefone, id_contato]);
+      client.end();
+      const results = result.rows;
+      const response = {
+        message: "cadastrado"
+      }
+      return response;
+    } catch (err) {
+      console.error(err)
+      const response = {
+        message: "erro"
+      }
+      return response;
+    }
+  }
+  async getId(id) {
+    try {
+      const client = new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+          rejectUnauthorized: false
+        },
+      });
+      client.connect();
+      const result = await client.query("SELECT * FROM public.funcionarios WHERE id_funcionarios = $1", [id]);
+      client.end();
+      const results = result.rows;
+      const response = {
+        message: "achou"
+      }
+      return response;
+    } catch (err) {
+      console.error(err)
+      const response = {
+        message: "erro"
+      }
+      return response;
+    }
+  }
 
-  const result = await runQuery( "INSERT INTO public.funcionarios (nome_funcionario, telefone) VALUES($1,$2);", [nome_funcionario, telefone]);
-  res.json(result);
-});
+}
 
-funcionarioRouter.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  const result = await runQuery("DELETE FROM public.funcionarios WHERE id_funcionarios=$1", [id]);
-  res.json(result);
-});
-
-funcionarioRouter.patch("/:id", async (req, res) => {
-    const {id_funcionarios}= req.params;
-    const { nome_funcionario , telefone} = req.body;
-    const result = await runQuery( "UPDATE public.funcionario SET nome_funcionario=$1, telefone=$2 WHERE idcontato=$3;", [nome_funcionario, telefone, id_funcionarios]);
-   res.json(result);
-});
-
-module.exports = funcionarioRouter;
+module.exports = FuncionarioController;

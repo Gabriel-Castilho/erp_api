@@ -1,18 +1,18 @@
 const {Router} = require("express")
 
-//const agendamentoRouter = require("./AgendamentoController")
+const agendamentoRouter = require("./agendamento.routes")
 const clienteRouter = require("./cliente.routes")
-//const funcionarioRouter = require("./FuncionarioController")
-//const servicoRouter = require("./ServicoController")
-//const despesasRouter = require ("./DespesasController")
+const funcionarioRouter = require("./funcionario.routes")
+const servicoRouter = require("./servico.routes")
+const despesasRouter = require ("./despesas.routes")
 
 
 const routes = Router();
 
-//routes.use("/agendamento", agendamentoRouter)
+routes.use("/agendamento", agendamentoRouter)
 routes.use("/cliente",clienteRouter)
-//routes.use("/despesas",despesasRouter)
-//routes.use("/servicos", servicoRouter)
-//routes.use("/funcionarios",funcionarioRouter)
+routes.use("/despesas",despesasRouter)
+routes.use("/servicos", servicoRouter)
+routes.use("/funcionarios",funcionarioRouter)
 
 module.exports = routes

@@ -118,17 +118,3 @@ class ClienteController{
 
 module.exports = ClienteController;
 
-/*
-
-
-
-
-
-clienteRouter.patch("/:id", async (req, res) => {
-  const { nome, telefone } = req.body;
-  const { id } = req.params;
-  const result = await runQuery("UPDATE public.clientes SET nome_clientes=$1, telefone=$2 WHERE id_clientes=$3;", [nome, telefone, id]);
-  res.json(result);
-});
-
-module.exports = clienteRouter;*/

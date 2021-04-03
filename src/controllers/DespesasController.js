@@ -1,36 +1,116 @@
-const { Router } = require("express");
-const { runQuery } = require("../Database/index");
+const {Client} =  require("pg")
 
-const despesasRouter = Router();
+class DespesasController{
+  async index(){
+    try{
+      const client = new Client({
+        connectionString:process.env.DATABASE_URL,
+        ssl:{
+          rejectUnauthorized: false
+        }, 
+      });
+      client.connect();
+      const result = await client.query("SELECT * FROM public.despesas");
+      client.end();
+      const results = result.rows;
+      return results;
+    }catch(err){
+      console.error(err)
+      return res.json(err)
+    }
+  }
 
-despesasRouter.get("/", async (req, res) => {
-  const result = await runQuery("SELECT * FROM public.despesas", null);
-  res.json(result);
-});
+  async create(quantidade,descricao,valor){
+    try{
+      const client = new Client({
+        connectionString:process.env.DATABASE_URL,
+        ssl:{
+          rejectUnauthorized:false
+        },
+      });
+      client.connect();
+      const result = await client.query("INSERT INTO public.despesas (quantidade, descricao ,valor) VALUES($1,$2,$3);", [quantidade,descricao,valor]);
+      client.end();
+      const results = result.rows;
+      const response = {
+        message:"cadastrado"
+      }
+      return response;
+    }catch(err){
+      console.error(err)
+      const response={
+        message:"erro"
+      }
+      return response;
+    }
+  }
+  async delete(id){
+    try{
+      const client = new Client({
+        connectionString:process.env.DATABASE_URL,
+        ssl:{
+          rejectUnauthorized:false
+        },
+      });
+      client.connect();
+      const result = await client.query("DELETE FROM public.despesas WHERE id_despesas=$1", [id]);
+      client.end();
+      const results = result.rows;
+      return results;
+    }catch(err){
+      return res.json(err)
+    }
+  }
+  async update(quantidade,descricao,valor,id_despesas){
+    try{
+      const client = new Client({
+        connectionString:process.env.DATABASE_URL,
+        ssl:{
+          rejectUnauthorized:false
+        },
+      });
+      client.connect();
+      const result = await client.query("UPDATE public.despesas SET quantidade=$1, descricao=$2,valor=$3 WHERE idcontato=$4;", [quantidade, descricao, valor,id_despesas]);
+      client.end();
+      const results = result.rows;
+      const response = {
+        message:"cadastrado"
+      }
+      return response;
+    }catch(err){
+      console.error(err)
+      const response={
+        message:"erro"
+      }
+      return response;
+    }
+  }
 
-despesasRouter.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  const result = await runQuery("SELECT * FROM public.despesas WHERE id_despesas = $1", [id]);
-  res.json(result);
-});
+  async getId(id){
+    try{
+      const client = new Client({
+        connectionString:process.env.DATABASE_URL,
+        ssl:{
+          rejectUnauthorized:false
+        },
+      });
+      client.connect();
+      const result = await client.query("SELECT * FROM public.despesas WHERE id_despesas=$1", [id]);
+      client.end();
+      const results = result.rows;
+      const response = {
+        message:"achou"
+      }
+      return response;
+    }catch(err){
+      console.error(err)
+      const response={
+        message:"erro"
+      }
+      return response;
+    }
+  }
 
-despesasRouter.post("/", async (req, res) => {
-  const { descricao,valor,quantidade } = req.body;
-  const result = await runQuery( "INSERT INTO public.despesas (quantidade, descricao ,valor) VALUES($1,$2,$3);", [quantidade,descricao,valor]);
-  res.json(result);
-});
+}
 
-despesasRouter.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  const result = await runQuery("DELETE FROM public.despesas WHERE id_despesas=$1", [id]);
-  res.json(result);
-});
-
-despesasRouter.patch("/:id", async (req, res) => {
-    const {id_despesas}= req.params;
-    const { descricao,valor,quantidade} = req.body;
-    const result = await runQuery( "UPDATE public.despesas SET quantidade=$1, descricao=$2,valor=$3 WHERE idcontato=$4;", [quantidade, descricao, valor,id_despesas]);
-   res.json(result);
-});
-
-module.exports = despesasRouter;
+module.exports = DespesasController;
