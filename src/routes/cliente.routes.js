@@ -17,14 +17,14 @@ clienteRouter.post("/",async(req,res)=>{
 
 clienteRouter.delete("/:id",async(req,res)=>{
     const {id} = req.params
-    idNumber = parseInt(id)
+    var idNumber = parseInt(id)
     const items = await clienteController.delete(idNumber)
     return res.json(items)
 })
 
 clienteRouter.get("/:id"),async(req,res)=>{
     const {id}= req.params
-    idNumber = parseInt(id)
+    var idNumber = parseInt(id)
     const items = await clienteController.getId(idNumber)
     return res.json(items)
 }
@@ -37,3 +37,4 @@ clienteRouter.patch("/:id",async(req,res)=>{
 })
 
 module.exports=clienteRouter
+

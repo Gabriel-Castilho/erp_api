@@ -71,7 +71,7 @@ class ClienteController{
         connectionString:process.env.DATABASE_URL,
         ssl:{
           rejectUnauthorized:false
-        },
+        }, 
       });
       client.connect();
       const result = await client.query("SELECT * FROM public.clientes WHERE id_clientes=$1", [id_clientes]);
