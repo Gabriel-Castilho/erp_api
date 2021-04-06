@@ -22,12 +22,12 @@ clienteRouter.delete("/:id",async(req,res)=>{
     return res.json(items)
 })
 
-clienteRouter.get("/:id"),async(req,res)=>{
+clienteRouter.get("/:id",async(req,res)=>{
     const {id}= req.params
     var idNumber = parseInt(id)
     const items = await clienteController.getId(idNumber)
     return res.json(items)
-}
+})
 
 clienteRouter.patch("/:id",async(req,res)=>{
     const {id} = req.params
