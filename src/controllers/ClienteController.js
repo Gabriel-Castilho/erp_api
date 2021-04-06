@@ -77,16 +77,10 @@ class ClienteController{
       const result = await client.query("SELECT * FROM public.clientes WHERE id_clientes=$1", [id_clientes]);
       client.end();
       const results = result.rows;
-      const response = {
-        message:"achou"
-      }
-      return response;
+      return results;
     }catch(err){
       console.error(err)
-      const response={
-        message:"erro"
-      }
-      return response;
+      return res.json(err)
     }
   }
 
