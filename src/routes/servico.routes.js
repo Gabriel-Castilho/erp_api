@@ -21,12 +21,12 @@ servicoRouter.delete("/:id",async(req,res)=>{
     const items = await servicoController.delete(idNumber)
     return res.json(items)
 })
-servicoRouter.get("/:id"),async(req,res)=>{
+servicoRouter.get("/:id",async(req,res)=>{
     const {id}= req.params
     let idNumber = parseInt(id)
     const items = await servicoController.getId(idNumber)
     return res.json(items)
-}
+})
 
 servicoRouter.patch("/:id",async(req,res)=>{
     const {id} = req.params

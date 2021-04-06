@@ -22,12 +22,12 @@ agendamentoRouter.delete("/:id",async(req,res)=>{
     return res.json(items)
 })
 
-agendamentoRouter.get("/:id"),async(req,res)=>{
+agendamentoRouter.get("/:id",async(req,res)=>{
     const {id}= req.params
     let idNumber = parseInt(id)
     const items = await agendamentoController.getId(idNumber)
     return res.json(items)
-}
+})
 
 agendamentoRouter.patch("/:id",async(req,res)=>{
     const {id} = req.params

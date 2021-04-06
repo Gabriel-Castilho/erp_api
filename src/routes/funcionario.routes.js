@@ -22,12 +22,12 @@ funcionarioRouter.delete("/:id",async(req,res)=>{
     return res.json(items)
 })
 
-funcionarioRouter.get("/:id"),async(req,res)=>{
+funcionarioRouter.get("/:id",async(req,res)=>{
     const {id}= req.params
     let idNumber = parseInt(id)
     const items = await funcionarioController.getId(idNumber)
     return res.json(items)
-}
+})
 
 funcionarioRouter.patch("/:id",async(req,res)=>{
     const {id} = req.params

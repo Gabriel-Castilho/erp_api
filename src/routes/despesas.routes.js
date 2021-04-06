@@ -21,12 +21,12 @@ despesasRouter.delete("/:id",async(req,res)=>{
     const items = await despesasController.delete(idNumber)
     return res.json(items)
 })
-despesasRouter.get("/:id"),async(req,res)=>{
+despesasRouter.get("/:id",async(req,res)=>{
     const {id}= req.params
     let idNumber = parseInt(id)
     const items = await despesasController.getId(idNumber)
     return res.json(items)
-}
+})
 
 despesasRouter.patch("/:id",async(req,res)=>{
     const {id} = req.params
