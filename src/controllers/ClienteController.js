@@ -61,7 +61,11 @@ class ClienteController{
       const results = result.rows;
       return results;
     }catch(err){
-      //return res.json(err)
+      console.error(err)
+      const response={
+        message:"erro ao deletar"
+      }
+      return response
     }
   }
 
