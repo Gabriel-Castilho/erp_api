@@ -61,7 +61,7 @@ class ClienteController{
       const results = result.rows;
       return results;
     }catch(err){
-      return res.json(err)
+      //return res.json(err)
     }
   }
 
