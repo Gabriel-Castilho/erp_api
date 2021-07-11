@@ -99,10 +99,7 @@ class FuncionarioController {
       const result = await client.query("SELECT * FROM public.funcionarios WHERE id_funcionarios = $1", [id]);
       client.end();
       const results = result.rows;
-      const response = {
-        message: "achou"
-      }
-      return response;
+      return results;
     } catch (err) {
       console.error(err)
       const response = {
