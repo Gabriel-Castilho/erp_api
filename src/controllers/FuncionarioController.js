@@ -72,7 +72,7 @@ class FuncionarioController {
         },
       });
       client.connect();
-      const result = await client.query("UPDATE public.funcionario SET nome_funcionario=$1, telefone=$2 WHERE id_funcionarios=$3;", [nome_funcionario, telefone, id]);
+      const result = await client.query("UPDATE public.funcionarios SET nome_funcionario=$1, telefone=$2 WHERE id_funcionarios=$3;", [nome_funcionario, telefone, id]);
       client.end();
       const results = result.rows;
       const response = {

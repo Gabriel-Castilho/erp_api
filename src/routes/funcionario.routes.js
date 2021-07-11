@@ -29,11 +29,11 @@ funcionarioRouter.get("/:id",async(req,res)=>{
     return res.json(items)
 })
 
-funcionarioRouter.put("/:id",async(req,res)=>{
+funcionarioRouter.patch("/:id",async(req,res)=>{
     const {id} = req.params
     let idNumber = parseInt(id)
     const {nome_funcionario,telefone} = req.body
-    const items = await funcionarioController.update(nome_funcionario,telefone,idNumber)
+    const items = await funcionarioController.update(nome_funcionario,telefone,id)
     return res.json(items)
 })
 
