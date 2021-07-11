@@ -19,7 +19,7 @@ class FuncionarioController {
     } catch (err) {
       console.error(err)
       return res.json(err)
-    }
+    } 
   }
   async create(nome_funcionario, telefone) {
     try {

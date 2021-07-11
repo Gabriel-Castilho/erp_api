@@ -20,7 +20,7 @@ class ClienteController{
       return res.json(err)
     }
   }
- 
+  
 
   async create(first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state){
     try{
@@ -43,7 +43,6 @@ class ClienteController{
       const response={
         message:"Erro ao cadastar cliente"
       }
-      status.code=400;
       return response;
     }
   }

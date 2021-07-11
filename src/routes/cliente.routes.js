@@ -21,7 +21,7 @@ clienteRouter.delete("/:id",async(req,res)=>{
     const items = await clienteController.delete(idNumber)
     return res.json(items)
 })
-
+ 
 clienteRouter.get("/:id",async(req,res)=>{
     const {id}= req.params
     var idNumber = parseInt(id)
