@@ -13,7 +13,7 @@ funcionarioRouter.post("/",async(req,res)=>{
     const{nome_funcionario,telefone} = req.body
     const items = await funcionarioController.create(nome_funcionario,telefone)
     return res.json(items)
-})
+}) 
 
 funcionarioRouter.delete("/:id",async(req,res)=>{
     const {id} = req.params
