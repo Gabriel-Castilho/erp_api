@@ -41,7 +41,7 @@ class ClienteController{
     }catch(err){
       console.error(err)
       const response={
-        message:"erro"
+        message:"Erro ao cadastar cliente"
       }
       return response;
     }
