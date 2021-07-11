@@ -22,7 +22,7 @@ class ClienteController{
   }
 
 
-  async create(nome_clientes,telefone){
+  async create(firstName,phone,lastName,dateNasc,phone2,cpf,street,city,cep,number,state){
     try{
       const client = new Client({
         connectionString:process.env.DATABASE_URL,
@@ -31,7 +31,8 @@ class ClienteController{
         },
       });
       client.connect();
-      const result = await client.query("INSERT INTO public.clientes (nome_clientes, telefone) VALUES($1,$2);", [nome_clientes, telefone]);
+      const result = await client.query("INSERT INTO public.clientes (firstName, phone, lastName, dateNasc, phone2,cpf,street,city,cep,number,state) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11);", 
+      [firstName,phone,lastName,dateNasc,phone2,cpf,street,city,cep,number,state]);
       client.end();
       const results = result.rows;
       const response = {
