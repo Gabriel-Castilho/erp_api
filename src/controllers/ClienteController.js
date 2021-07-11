@@ -31,7 +31,7 @@ class ClienteController{
         },
       });
       client.connect();
-      const result = await client.query("INSERT INTO public.clientes (first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state) VALUES ('$1', '$2', '$3', '$4', '$5', '$6', '$7', '$8', '$9', '$10', '$11');",[first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state]);
+      const result = await client.query("INSERT INTO public.clientes (first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state) VALUES('$1', '$2', '$3', '$4', '$5', '$6', '$7', '$8', '$9', '$10', '$11');",[first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state]);
       client.end();
       const results = result.rows;
       const response = {
