@@ -43,6 +43,7 @@ class ClienteController{
       const response={
         message:"Erro ao cadastar cliente"
       }
+      status.code=400;
       return response;
     }
   }
