@@ -88,7 +88,7 @@ class ClienteController{
     }
   }
 
-  async update(nome,telefone,id){
+  async update(first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state,id_clientes){
     try{
       const client = new Client({
         connectionString:process.env.DATABASE_URL,
@@ -97,7 +97,8 @@ class ClienteController{
         },
       });
       client.connect();
-      const result = await client.query("UPDATE public.clientes SET nome_clientes=$1, telefone=$2 WHERE id_clientes=$3;", [nome, telefone, id]);
+      const result = await client.query("UPDATE public.clientes SET first_name='$1', phone1='$2', last_name='$3', date_nasc='$4', phone2='$5', cpf='$6', street='$7', city='$8', cep='$9', number_house='$10', state='$11' WHERE id_clientes=$12;"
+      , [first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state, id_clientes]);
       client.end();
       const results = result.rows;
       const response = {

@@ -63,7 +63,7 @@ class FuncionarioController {
       return res.json(err)
     }
   }
-  async update(nome_funcionario, telefone, id) {
+  async update(nome_funcionario, telefone, id_contato) {
     try {
       const client = new Client({
         connectionString: process.env.DATABASE_URL,
