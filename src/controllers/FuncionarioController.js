@@ -76,7 +76,7 @@ class FuncionarioController {
       client.end();
       const results = result.rows;
       const response = {
-        message: "cadastrado"
+        message: "editado"
       }
       return response;
     } catch (err) {
