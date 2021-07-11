@@ -31,10 +31,9 @@ class ClienteController{
         },
       });
       client.connect();
-      const result = await client.query("INSERT INTO public.clientes (firstName, phone1, lastName, dateNasc, phone2,cpf,street,city,cep,number,state) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11);", 
+      const result = await client.query("INSERT INTO public.clientes (firstName, phone1, lastName, dateNasc, phone2, cpf, street, city, cep, number, state) VALUES('$1', '$2', '$3', '$4', '$5', '$6', '$7', '$8', '$9', '$10', '$11');",
       [firstName,phone1,lastName,dateNasc,phone2,cpf,street,city,cep,number,state]);
       client.end();
-      const results = result.rows;
       const response = {
         message:"cadastrado"
       }
