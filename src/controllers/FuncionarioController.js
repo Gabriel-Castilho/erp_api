@@ -63,7 +63,7 @@ class FuncionarioController {
       return res.json(err)
     }
   }
-  async update(nome_funcionario, telefone, id_funcionarios) {
+  async update(nome_funcionario, telefone, id) {
     try {
       const client = new Client({
         connectionString: process.env.DATABASE_URL,
@@ -72,7 +72,7 @@ class FuncionarioController {
         },
       });
       client.connect();
-      const result = await client.query("UPDATE public.funcionario SET nome_funcionario=$1, telefone=$2 WHERE id_funcionarios=$3;", [nome_funcionario, telefone, id_funcionarios]);
+      const result = await client.query("UPDATE public.funcionario SET nome_funcionario=$1, telefone=$2 WHERE id_funcionarios=$3;", [nome_funcionario, telefone, id]);
       client.end();
       const results = result.rows;
       const response = {
