@@ -21,7 +21,7 @@ class ClienteController{
     }
   }
   
-  async create(first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state){
+  async create(firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state){
     try{
       const client = new Client({
         connectionString:process.env.DATABASE_URL,
@@ -30,8 +30,8 @@ class ClienteController{
         },
       });
       client.connect();
-      const result = await client.query("INSERT INTO public.clientes (first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);",
-      [first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state]);
+      const result = await client.query("INSERT INTO public.clientes (firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);",
+      [firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state]);
       client.end();
       const results = result.rows;
       const response = {
@@ -88,7 +88,7 @@ class ClienteController{
     }
   }
 
-  async update(first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state,id_clientes){
+  async update(firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state,idclientes){
     try{
       const client = new Client({
         connectionString:process.env.DATABASE_URL,
@@ -97,7 +97,7 @@ class ClienteController{
         },
       });
       client.connect();
-      const result = await client.query("UPDATE public.clientes SET first_name=$1, phone1=$2, last_name=$3, date_nasc=$4, phone2=$5, cpf=$6, street=$7, city=$8, cep=$9, number_house=$10, state=$11 WHERE id_clientes=$12;",[first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state,id_clientes]);
+      const result = await client.query("UPDATE public.clientes SET firstname=$1, phone1=$2, lastname=$3, datenasc=$4, phone2=$5, cpf=$6, street=$7, city=$8, cep=$9, numberhouse=$10, state=$11 WHERE idclientes=$12;",[firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state,idclientes]);
       client.end();
       const results = result.rows;
       const response = {

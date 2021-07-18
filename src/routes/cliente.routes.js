@@ -10,8 +10,8 @@ clienteRouter.get("/",async (req,res)=>{
 })
 
 clienteRouter.post("/",async(req,res)=>{
-    const{first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state} = req.body
-    const items = await clienteController.create(first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state)
+    const{firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state} = req.body
+    const items = await clienteController.create(firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state)
     return res.json(items)
 })
 
@@ -31,8 +31,8 @@ clienteRouter.get("/:id",async(req,res)=>{
 
 clienteRouter.patch("/:id",async(req,res)=>{
     const {id} = req.params
-    const {first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state} = req.body
-    const items = await clienteController.update(first_name, phone1, last_name, date_nasc, phone2, cpf, street, city, cep, number_house, state,id)
+    const {firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state} = req.body
+    const items = await clienteController.update(firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state,id)
     return res.json(items)
 })
 
