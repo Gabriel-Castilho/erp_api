@@ -32,10 +32,10 @@ class LoginController{
       client.connect();
 
 //hash de senha
-      var salt = brycpt.genSaltSync(10);
-      var hash = bcrypt.hashSync(senha,salt);
+      //var salt = brycpt.genSaltSync(10);
+      //var hash = bcrypt.hashSync(senha,salt);
       const result = await client.query("INSERT INTO public.usuarios (email,senha) VALUES($1, $2);",
-      [email,hash]);
+      [email,senha]);
       client.end();
       const results = result.rows;
       const response = {
