@@ -34,7 +34,7 @@ class UsuarioController{
     if(result.length < 1){
       return res.status(401).send({mensagem: "Falha na autenticação"})
     }
-    bcrypt.compare(senha,results[0].senha,(err,result)=>{
+    bcrypt.compare(senha,result[0].senha,(err,result)=>{
         if(err){
           return res.status(401).send({mensagem: "Falha na autenticação"})
         }
