@@ -10,8 +10,8 @@ loginRouter.get("/",async (req,res)=>{
 })
 
 loginRouter.post("/",async(req,res)=>{
-    const{email,password} = req.body
-    const items = await loginController.create(email,password)
+    const{email,senha} = req.body
+    const items = await loginController.create(email,senha)
     return res.json(items)
 })
 
@@ -31,8 +31,8 @@ loginRouter.get("/:id",async(req,res)=>{
 
 loginRouter.patch("/:id",async(req,res)=>{
     const {id} = req.params
-    const {email,password} = req.body
-    const items = await loginController.update(email,password,id)
+    const {email,senha} = req.body
+    const items = await loginController.update(email,senha,id)
     return res.json(items)
 })
 

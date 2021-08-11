@@ -21,7 +21,7 @@ class LoginController{
     }
   }
   
-  async create(email,password){
+  async create(email,senha){
     try{
       const client = new Client({
         connectionString:process.env.DATABASE_URL,
@@ -33,8 +33,8 @@ class LoginController{
 
 //hash de senha
       var salt = brycpt.genSaltSync(10);
-      var hash = bcrypt.hashSync(password,salt);
-      const result = await client.query("INSERT INTO public.usuarios (email,password) VALUES($1, $2);",
+      var hash = bcrypt.hashSync(senha,salt);
+      const result = await client.query("INSERT INTO public.usuarios (email,senha) VALUES($1, $2);",
       [email,hash]);
       client.end();
       const results = result.rows;
