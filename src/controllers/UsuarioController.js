@@ -37,7 +37,7 @@ class UsuarioController{
       }
       return response
     }
-    console.log(result.senha)
+    console.log(result.rows.senha)
 
       /*var corret = bcrypt.compareSync(senha,result.senha)
         if(corret){
