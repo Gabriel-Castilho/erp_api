@@ -37,7 +37,7 @@ class LoginController{
               message:"Email já cadastrado"
             }
             return response;
-      }else{
+      }
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(senha,salt);
         
@@ -49,7 +49,7 @@ class LoginController{
             message:"cadastrado"
           }
           return response + "\n" +results;
-        }
+        
       }catch(err){
         console.error(err)
         const response={
