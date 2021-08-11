@@ -44,6 +44,11 @@ class LoginController{
       return response;
     }catch(err){
       console.error(err)
+      if(err = 'duplicate key value violates unique constraint "email"'){
+          const response = {
+              message: "Email ou senha incorretos"
+          }
+      }
       const response={
         message:"Erro ao cadastar email"
       }
