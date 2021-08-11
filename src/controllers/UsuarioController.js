@@ -31,7 +31,7 @@ class UsuarioController{
     });
     client.connect();
     const result = await client.query("SELECT * FROM public.usuarios WHERE email=$1;",[email])
-    if(result.length < 1){
+    if(result.rowCount  == 0){
       const response = {
         message:"Falha na autenticação"
       }
