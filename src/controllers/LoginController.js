@@ -30,6 +30,14 @@ class LoginController{
         },
       });
       client.connect();
+     const verifyEmail = await client.query("select count ('email') as number_of_rows from usuarios where email = $1;",[email])
+      if(verifyEmail = 0){
+          const response = {
+              message:"Email já cadastrado"
+            }
+            return response;
+      }
+      
 //hash de senha
      var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(senha,salt);
@@ -44,13 +52,8 @@ class LoginController{
       return response;
     }catch(err){
       console.error(err)
-      if(err = 'duplicate key value violates unique constraint "email"'){
-          const response = {
-              message: "Email ou senha incorretos"
-          }
-      }
       const response={
-        message:"Erro ao cadastar email"
+        message:"Erro ao cadastar cliente"
       }
       return response;
     }
