@@ -34,9 +34,9 @@ class LoginController{
 //hash de senha
      var salt = brycpt.genSaltSync(10);
      var hash = bcrypt.hashSync(senha,salt);
-     senha = hash;
+     //senha = hash;
       const result = await client.query("INSERT INTO public.usuarios (email,senha) VALUES($1, $2);",
-      [email,senha]);
+      [email,hash]);
       client.end();
       const results = result.rows;
       const response = {
