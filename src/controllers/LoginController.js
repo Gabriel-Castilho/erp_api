@@ -30,17 +30,17 @@ class LoginController{
         },
       });
       client.connect();
-
+      const verifyEmail = await client.query("SELECT * FROM public.usuarios (email, senha) WHERE email = $1;",[email])
+      if(verifyEmail != undefined){
+          const response = {
+              message:"Email já cadastrado"
+            }
+            return response;
+      }
 //hash de senha
      var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(senha,salt);
-    const verifyEmail = await client.query("SELECT * FROM public.usuarios (email, senha) WHERE email = $1;")
-    if(verifyEmail != undefined){
-        const response = {
-            message:"Email já cadastrado"
-          }
-          return response;
-    }
+    
       const result = await client.query("INSERT INTO public.usuarios (email,senha) VALUES($1, $2);",
       [email,hash]);
       client.end();
