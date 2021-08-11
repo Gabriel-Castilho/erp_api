@@ -31,7 +31,8 @@ class LoginController{
       });
       client.connect();
        const verifyEmail = await client.query("SELECT (email) FROM public.usuarios WHERE email = $1;",[email])
-      if(verifyEmail != 0){
+       const verify = verifyEmail.rows;
+      if(verify =! 0){
           const response = {
               message:"Email já cadastrado"
             }
@@ -47,7 +48,7 @@ class LoginController{
           const response = {
             message:"cadastrado"
           }
-          return response;
+          return response + "\n" +results;
         }
       }catch(err){
         console.error(err)
