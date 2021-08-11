@@ -12,7 +12,7 @@ loginRouter.get("/",async (req,res)=>{
 
 loginRouter.post("/",async(req,res)=>{
     const{email,senha} = req.body
-    var salt = brycpt.genSaltSync(10);
+    var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(senha,salt);
     const items = await loginController.create(email,hash)
     return res.json(items)
