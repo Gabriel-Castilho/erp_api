@@ -32,7 +32,11 @@ class UsuarioController{
     client.connect();
     const result = await client.query("SELECT * FROM public.usuarios WHERE email=$1;",[email])
     if(result.length < 1){
-      return res.status(401).send({mensagem: "Falha na autenticação"})
+      const response = {
+        message:"Falha na autenticação"
+      }
+      
+      //return res.status(401).send({mensagem: "Falha na autenticação"})
     }
       var corret = bcrypt.compareSync(senha,result.senha)
         if(corret){
