@@ -34,15 +34,11 @@ class UsuarioController{
     if(result.length < 1){
       return res.status(401).send({mensagem: "Falha na autenticação"})
     }
-    bcrypt.compare(senha,result[0].senha,(err,result)=>{
-        if(err){
-          return res.status(401).send({mensagem: "Falha na autenticação"})
+      var corret = bcrypt.compareSync(senha,result.senha)
+        if(corret){
+          return res.status(200).send({mensagem: "sucesso"})
         }
-        if(result){
-          res.status(200).send({mensagem:"Autenticado com sucesso"})
-        }
-        return res.status(401).send({mensagem: "Email ou senha inválidos"})
-    })
+    
     client.end();
   }catch(err){
     console.error(err)
