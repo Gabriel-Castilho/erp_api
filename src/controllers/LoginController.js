@@ -1,7 +1,7 @@
 const {Client}=require("pg");
+const bcrypt = require('bcryptjs')
 
-
-class ClienteController{
+class LoginController{
   async index(){
     try{
       const client = new Client({
@@ -11,7 +11,7 @@ class ClienteController{
         },  
       });
       client.connect();
-      const result = await client.query("SELECT * FROM public.clientes;");
+      const result = await client.query("SELECT * FROM public.usuarios;");
       client.end();
       const results = result.rows;
       return results;
@@ -21,7 +21,7 @@ class ClienteController{
     }
   }
   
-  async create(firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state){
+  async create(email,password){
     try{
       const client = new Client({
         connectionString:process.env.DATABASE_URL,
@@ -30,8 +30,12 @@ class ClienteController{
         },
       });
       client.connect();
-      const result = await client.query("INSERT INTO public.clientes (firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);",
-      [firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state]);
+
+//hash de senha
+      var salt = brycpt.genSaltSync(10);
+      var hash = bcrypt.hashSync(password,salt);
+      const result = await client.query("INSERT INTO public.usuarios (email,password) VALUES($1, $2);",
+      [email,hash]);
       client.end();
       const results = result.rows;
       const response = {
@@ -56,7 +60,7 @@ class ClienteController{
         },
       });
       client.connect();
-      const result = await client.query("DELETE FROM public.clientes WHERE idclientes=$1", [id]);
+      const result = await client.query("DELETE FROM public.usuarios WHERE id=$1", [id]);
       client.end();
       const results = result.rows;
       return results;
@@ -69,7 +73,7 @@ class ClienteController{
     }
   }
 
-  async getId(id_clientes){
+  async getId(id){
     try{
       const client = new Client({
         connectionString:process.env.DATABASE_URL,
@@ -78,7 +82,7 @@ class ClienteController{
         }, 
       });
       client.connect();
-      const result = await client.query("SELECT * FROM public.clientes WHERE idclientes=$1", [id_clientes]);
+      const result = await client.query("SELECT * FROM public.usuarios WHERE id=$1", [id]);
       client.end();
       const results = result.rows;
       return results;
@@ -88,7 +92,7 @@ class ClienteController{
     }
   }
 
-  async update(firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state,idclientes){
+  async update(email,password){
     try{
       const client = new Client({
         connectionString:process.env.DATABASE_URL,
@@ -97,7 +101,7 @@ class ClienteController{
         },
       });
       client.connect();
-      const result = await client.query("UPDATE public.clientes SET firstname=$1, phone1=$2, lastname=$3, datenasc=$4, phone2=$5, cpf=$6, street=$7, city=$8, cep=$9, numberhouse=$10, state=$11 WHERE idclientes=$12;",[firstname, phone1, lastname, datenasc, phone2, cpf, street, city, cep, numberhouse, state,idclientes]);
+      const result = await client.query("UPDATE public.usuarios SET email=$1, password=$2 WHERE id=$3;",[email,password,id]);
       client.end();
       const results = result.rows;
       const response = {
@@ -114,5 +118,5 @@ class ClienteController{
   }
 }
 
-module.exports = ClienteController;
+module.exports = LoginController;
 
