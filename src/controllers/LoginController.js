@@ -31,12 +31,7 @@ class LoginController{
       });
       client.connect();
        const verifyEmail = await client.query("SELECT (email) FROM public.usuarios WHERE email = $1;",[email])
-      if(verifyEmail != 0){
-          const response = {
-              message:"Email já cadastrado"
-            }
-            return response;
-      }else{
+      if(verifyEmail == undefined){
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(senha,salt);
         
@@ -48,8 +43,14 @@ class LoginController{
             message:"cadastrado"
           }
           return response;
-        }
-      }catch(err){
+      }else{
+          const message={
+              message:'erro'
+          }
+          return message
+      }
+        
+        }catch(err){
         console.error(err)
         const response={
           message:"Erro ao cadastar cliente"
