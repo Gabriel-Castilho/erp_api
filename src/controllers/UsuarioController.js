@@ -1,7 +1,7 @@
 const {Client}=require("pg");
 const bcrypt = require('bcryptjs')
 
-class LoginController{
+class UsuarioController{
   async index(){
     try{
       const client = new Client({
@@ -118,5 +118,5 @@ class LoginController{
   }
 }
 
-module.exports = LoginController;
+module.exports = UsuarioController;
 
