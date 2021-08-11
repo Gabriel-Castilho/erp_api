@@ -11,15 +11,11 @@ loginRouter.get("/",async (req,res)=>{
 })
 
 loginRouter.post("/",async(req,res)=>{
-    bcrypt.hash(req.body.senha,10,(errBcrypt,hash)=>{
-        if(errBcrypt){
-            return res.status(500).send({error:errBcrypt})
-        }
-        const items = await loginController.create(req.body.email,hash),
-        return res.json(items)
-    })
-
-   
+    const{email,senha} = req.body
+    var salt = brycpt.genSaltSync(10);
+    var hash = bcrypt.hashSync(senha,salt);
+    const items = await loginController.create(email,hash)
+    return res.json(items)
 })
 
 loginRouter.delete("/:id",async(req,res)=>{
