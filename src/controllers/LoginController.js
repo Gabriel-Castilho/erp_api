@@ -32,25 +32,27 @@ class LoginController{
       client.connect();
      const verifyEmail = await client.query("select count ('email') as number_of_rows from usuarios where email = $1;",[email])
      const verify = verifyEmail.rowCount
-      if(verify == 1){
+      if(verify == 0){
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(senha,salt);
+        
+          const result = await client.query("INSERT INTO public.usuarios (email,senha) VALUES($1, $2);",
+          [email,hash]);
+          client.end();
+          const results = result.rows;
           const response = {
-              message:"Email já cadastrado"
-            }
-            return response;
+            message:"cadastrado"
+          }
+          return response;
+      }else{
+          const message ={
+              message:"errrr"
+          }
+          return message
       }
       
 //hash de senha
-     var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(senha,salt);
     
-      const result = await client.query("INSERT INTO public.usuarios (email,senha) VALUES($1, $2);",
-      [email,hash]);
-      client.end();
-      const results = result.rows;
-      const response = {
-        message:"cadastrado"
-      }
-      return response;
     }catch(err){
       console.error(err)
       const response={
