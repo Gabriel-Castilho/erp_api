@@ -32,11 +32,11 @@ class UsuarioController{
     client.connect();
     const result = await client.query("SELECT * FROM public.usuarios WHERE email=$1;",[email])
     if(result.rowCount  == 0){
-      const response = {
+     /* const response = {
         message:"Falha na autenticação"
       }
-      return response
-      //return res.status(401).send({mensagem: "Falha na autenticação"})
+      return response*/
+      return res.status(401).send({mensagem: "Falha na autenticação"})
     }
     console.log(result)
 
