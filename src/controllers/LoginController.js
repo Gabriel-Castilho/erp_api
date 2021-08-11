@@ -36,28 +36,29 @@ class LoginController{
               message:"Email já cadastrado"
             }
             return response;
-      }
+      }else{
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(senha,salt);
+        
+          const result = await client.query("INSERT INTO public.usuarios (email,senha) VALUES($1, $2);",
+          [email,hash]);
+          client.end();
+          const results = result.rows;
+          const response = {
+            message:"cadastrado"
+          }
+          return response;
+        }
+      }catch(err){
+        console.error(err)
+        const response={
+          message:"Erro ao cadastar cliente"
+        }
+        return response;
+      }}
       
 //hash de senha
-     var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(senha,salt);
-    
-      const result = await client.query("INSERT INTO public.usuarios (email,senha) VALUES($1, $2);",
-      [email,hash]);
-      client.end();
-      const results = result.rows;
-      const response = {
-        message:"cadastrado"
-      }
-      return response;
-    }catch(err){
-      console.error(err)
-      const response={
-        message:"Erro ao cadastar cliente"
-      }
-      return response;
-    }
-  }
+     
 
   async delete(id){
     try{
