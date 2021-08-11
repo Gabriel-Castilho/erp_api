@@ -32,7 +32,7 @@ class LoginController{
       client.connect();
      const verifyEmail = await client.query("select count ('email') as number_of_rows from usuarios where email = $1;",[email])
      const verify = verifyEmail.rows
-      if(verify == 0){
+      if(verifyEmail == 0){
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(senha,salt);
         
