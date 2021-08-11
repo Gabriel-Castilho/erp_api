@@ -1,5 +1,6 @@
 const {Router} = require("express")
 const LoginController = require("../controllers/LoginController")
+const bcrypt = require('bcryptjs')
 
 const loginRouter = Router();
 const loginController = new LoginController();
@@ -11,7 +12,9 @@ loginRouter.get("/",async (req,res)=>{
 
 loginRouter.post("/",async(req,res)=>{
     const{email,senha} = req.body
-    const items = await loginController.create(email,senha)
+    var salt = brycpt.genSaltSync(10);
+    var hash = bcrypt.hashSync(senha,salt);
+    const items = await loginController.create(email,hash)
     return res.json(items)
 })
 
