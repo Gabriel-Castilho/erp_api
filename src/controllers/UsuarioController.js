@@ -35,14 +35,16 @@ class UsuarioController{
       const response = {
         message:"Falha na autenticação"
       }
-      
+      return response
       //return res.status(401).send({mensagem: "Falha na autenticação"})
     }
-      var corret = bcrypt.compareSync(senha,result.senha)
+    console.log(result)
+
+      /*var corret = bcrypt.compareSync(senha,result.senha)
         if(corret){
           return res.status(200).send({mensagem: "sucesso"})
         }
-    
+    */
     client.end();
   }catch(err){
     console.error(err)
