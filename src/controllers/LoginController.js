@@ -30,36 +30,26 @@ class LoginController{
         },
       });
       client.connect();
-       const verifyEmail = await client.query("SELECT (email) FROM public.usuarios WHERE email = $1;",[email])
-       const verify = verifyEmail.rows;
-      if(verify =! 0){
-          const response = {
-              message:"Email já cadastrado"
-            }
-            return response;
-      }
-        var salt = bcrypt.genSaltSync(10);
-        var hash = bcrypt.hashSync(senha,salt);
-        
-          const result = await client.query("INSERT INTO public.usuarios (email,senha) VALUES($1, $2);",
-          [email,hash]);
-          client.end();
-          const results = result.rows;
-          const response = {
-            message:"cadastrado"
-          }
-          return response;
-        
-      }catch(err){
-        console.error(err)
-        const response={
-          message:"Erro ao cadastar cliente"
-        }
-        return response;
-      }}
-      
 //hash de senha
-     
+     var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(senha,salt);
+    
+      const result = await client.query("INSERT INTO public.usuarios (email,senha) VALUES($1, $2);",
+      [email,hash]);
+      client.end();
+      const results = result.rows;
+      const response = {
+        message:"cadastrado"
+      }
+      return response;
+    }catch(err){
+      console.error(err)
+      const response={
+        message:"Erro ao cadastar email"
+      }
+      return response;
+    }
+  }
 
   async delete(id){
     try{
