@@ -11,9 +11,15 @@ loginRouter.get("/",async (req,res)=>{
 })
 
 loginRouter.post("/",async(req,res)=>{
-    const{email,senha} = req.body
-    const items = await loginController.create(email,senha)
-    return res.json(items)
+    bcrypt.hash(req.body.senha,10,(errBcrypt,hash)=>{
+        if(errBcrypt){
+            return res.status(500).send({error:errBcrypt})
+        }
+        const items = await loginController.create(req.body.email,hash),
+        return res.json(items)
+    })
+
+   
 })
 
 loginRouter.delete("/:id",async(req,res)=>{
