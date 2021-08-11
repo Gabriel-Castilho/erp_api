@@ -43,6 +43,7 @@ class UsuarioController{
         }
         return res.status(401).send({mensagem: "Email ou senha inválidos"})
     })
+    client.end();
   }catch(err){
     console.error(err)
     return res.json(err)
