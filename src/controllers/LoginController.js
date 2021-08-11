@@ -30,7 +30,7 @@ class LoginController{
         },
       });
       client.connect();
-     /**  const verifyEmail = await client.query("SELECT * FROM public.usuarios (email, senha) WHERE email = $1;",[email])
+     /*  const verifyEmail = await client.query("SELECT * FROM public.usuarios (email, senha) WHERE email = $1;",[email])
       if(verifyEmail != undefined){
           const response = {
               message:"Email já cadastrado"
