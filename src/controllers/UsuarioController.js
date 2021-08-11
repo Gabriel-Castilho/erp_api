@@ -42,7 +42,9 @@ class UsuarioController{
     client.end();
   }catch(err){
     console.error(err)
-    return res.json(err)
+   const response={
+     message:"Error"
+   }
   }
   }
   
