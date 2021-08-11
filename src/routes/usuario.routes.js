@@ -16,8 +16,9 @@ usuarioRouter.post("/",async(req,res)=>{
     return res.json(items)
 })
 
-usuarioRouter.get("/login",async (req,res)=>{
-    const items = await usuarioController.index()
+usuarioRouter.post("/authenticate",async (req,res)=>{
+    const{email,senha} = req.body
+    const items = await usuarioController.login(email,senha)
     return res.json(items)
 })
 

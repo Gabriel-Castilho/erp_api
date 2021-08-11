@@ -20,6 +20,34 @@ class UsuarioController{
       return res.json(err)
     }
   }
+
+  async login(email,senha){
+    try{
+      const client = new Client({
+      connectionString:process.env.DATABASE_URL,
+      ssl:{
+        rejectUnauthorized: false
+      },  
+    });
+    client.connect();
+    const result = await client.query("SELECT * FROM public.usuarios WHERE email=$1;",[email])
+    if(result.length < 1){
+      return res.status(401).send({mensagem: "Falha na autenticação"})
+    }
+    bcrypt.compare(senha,results[0].senha,(err,result)=>{
+        if(err){
+          return res.status(401).send({mensagem: "Falha na autenticação"})
+        }
+        if(result){
+          res.status(200).send({mensagem:"Autenticado com sucesso"})
+        }
+        return res.status(401).send({mensagem: "Email ou senha inválidos"})
+    })
+  }catch(err){
+    console.error(err)
+    return res.json(err)
+  }
+  }
   
   async create(email,senha){
     try{
@@ -30,7 +58,7 @@ class UsuarioController{
         },
       });
       client.connect();
-//hash de senha
+    //hash de senha
      var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(senha,salt);
     
