@@ -31,7 +31,8 @@ class LoginController{
       });
       client.connect();
      const verifyEmail = await client.query("select count ('email') as number_of_rows from usuarios where email = $1;",[email])
-      if(verifyEmail == 1){
+     const verify = verifyEmail.rowCount
+      if(verify == 1){
           const response = {
               message:"Email já cadastrado"
             }
