@@ -37,14 +37,15 @@ class UsuarioController{
       }
       return response
     }
-    console.log(result.rows[0].senha)
-  
 
-      /*var corret = bcrypt.compareSync(senha,result.senha)
+      var corret = bcrypt.compareSync(senha,result.rows[0].senha)
         if(corret){
-          return res.status(200).send({mensagem: "sucesso"})
+          const response = {
+            message:"Autenticado com Sucesso"
+          }
+          return response
         }
-    */
+    
     client.end();
   }catch(err){
     console.error(err)
