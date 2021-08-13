@@ -41,7 +41,7 @@ class UsuarioController {
       } else {
         var corret = bcrypt.compareSync(senha, result.rows[0].senha)
         if (corret) {
-            JSON.session.user={
+            JSON.session={
               id: result.rows[0].id,
               email:result.rows[0].email
             } 
