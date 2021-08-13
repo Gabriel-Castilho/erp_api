@@ -45,6 +45,10 @@ class UsuarioController {
               id: result.rows[0].id,
               email:result.rows[0].email
             } 
+            const response ={
+              message: req.session.user
+            }
+            return response
             
             /*const response = {
               message: "Autenticado com Sucesso"
