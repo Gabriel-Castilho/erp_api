@@ -1,4 +1,4 @@
-function adminAuth(req,res,next){
+function usuarioAuth(req,res,next){
     if(req.session.user){
         if(JSON.session != undefined){
             next();
@@ -11,4 +11,6 @@ function adminAuth(req,res,next){
         }
         }
     }
+
+    module.exports = usuarioAuth
 
