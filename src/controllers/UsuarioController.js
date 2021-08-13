@@ -46,7 +46,7 @@ class UsuarioController {
               email:result.rows[0].email
             } 
             const response ={
-              message: JSON.session.user
+              message: JSON.session
             }
             return response
             
