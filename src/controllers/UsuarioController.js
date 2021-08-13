@@ -1,6 +1,7 @@
 const { Client } = require("pg");
 const bcrypt = require('bcryptjs')
 
+
 class UsuarioController {
   async index() {
     try {
