@@ -6,7 +6,7 @@ const usuarioAuth = require("../middleware/usuarioAuth")
 const usuarioRouter = Router();
 const usuarioController = new UsuarioController();
 
-usuarioRouter.get("/",usuarioAuth, async (req,res)=>{
+usuarioRouter.get("/", async (req,res)=>{
     const items = await usuarioController.index()
     return res.json(items)
 })
