@@ -1,6 +1,7 @@
 const { Client } = require("pg");
 const bcrypt = require('bcryptjs')
-
+require (".dotenv-safe").config();
+const jwt = require("jsonwebtoken")
 
 class UsuarioController {
   async index() {
@@ -34,25 +35,24 @@ class UsuarioController {
       const result = await client.query("SELECT * FROM public.usuarios WHERE email=$1;", [email])
       client.end();
       if (result.rowCount == 0) {
-        const response = {
-          message: "Falha na autenticação"
+        
+        const token = jwt.sign({
+          id_usuario: result.rows[0].id,
+          email: result.rows[0].email
+        },process.env.SECRET,{expiresIn:"1h"})
+        
+        
+         const response = {
+          message: "Falha na autenticação",
+          token: token
         }
         return response
-
+      
       } else {
         var corret = bcrypt.compareSync(senha, result.rows[0].senha)
         if (corret) {
             
-            const response ={
-              message: "Autenticado com sucesso"
-            }
-            return response
             
-            /*const response = {
-              message: "Autenticado com Sucesso"
-            }
-            return response
-            */
         } else {
           const response = {
             message: "Senha Errada"
