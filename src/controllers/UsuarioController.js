@@ -34,24 +34,24 @@ class UsuarioController {
       const result = await client.query("SELECT * FROM public.usuarios WHERE email=$1;", [email])
       client.end();
       if (result.rowCount == 0) {
-        
-        const token = jwt.sign({
-          id_usuario: result.rows[0].id,
-          email: result.rows[0].email
-        },process.env.SECRET,{expiresIn:"1h"})
-        
-        
-         const response = {
-          message: "Falha na autenticação",
-          token: token
+        const response = {
+          message: "Falha na autenticação"
         }
         return response
-      
+
       } else {
         var corret = bcrypt.compareSync(senha, result.rows[0].senha)
         if (corret) {
-            
-            
+          const token = jwt.sign({
+            id_usuario: result.rows[0].id,
+            email: result.rows[0].email
+          },process.env.SECRET,{expiresIn:"1h"})
+          
+            const response ={
+              message: "Autenticado com sucesso",
+              token: token;
+            }
+            return response
         } else {
           const response = {
             message: "Senha Errada"
