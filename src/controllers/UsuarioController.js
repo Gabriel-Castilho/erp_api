@@ -49,7 +49,7 @@ class UsuarioController {
           
             const response ={
               message: "Autenticado com sucesso",
-              token: token;
+              token: token
             }
             return response
         } else {
