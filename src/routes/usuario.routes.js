@@ -1,5 +1,7 @@
 const {Router} = require("express")
 const UsuarioController = require("../controllers/UsuarioController")
+const jwt = require("jsonwebtoken")
+const jwtSecret = "xz2!fg7@8uiuç"
 
 
 const usuarioRouter = Router();
