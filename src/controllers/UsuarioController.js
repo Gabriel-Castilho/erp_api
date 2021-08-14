@@ -1,6 +1,7 @@
 const { Client } = require("pg");
 const bcrypt = require('bcryptjs')
 const jwt = require("jsonwebtoken")
+const jwtSecret = "xz2!fg7@8uiuç"
 
 class UsuarioController {
   async index() {
@@ -42,14 +43,14 @@ class UsuarioController {
       } else {
         var corret = bcrypt.compareSync(senha, result.rows[0].senha)
         if (corret) {
-        /*  const token = jwt.sign({
+         const token = jwt.sign({
             id_usuario: result.rows[0].id,
             email: result.rows[0].email
-          },process.env.SECRET,{expiresIn:"1h"})
-          */
+          },jwtSecret,{expiresIn:"1h"})
+          
             const response ={
               message: "Autenticado com sucesso",
-             //token: token
+             token: token
             }
             return response
         } else {
