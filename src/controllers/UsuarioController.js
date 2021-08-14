@@ -164,8 +164,11 @@ class UsuarioController {
       }
       return response;
     }
-  }
+  }  
 }
 
+
 module.exports = UsuarioController;
+
+
 

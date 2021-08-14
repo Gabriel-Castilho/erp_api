@@ -1,12 +1,12 @@
 const {Router} = require("express")
 const UsuarioController = require("../controllers/UsuarioController")
-const usuarioAuth = require("../middleware/usuarioAuth")
+const auth = require("../middleware/usuarioAuth")
 
 
 const usuarioRouter = Router();
 const usuarioController = new UsuarioController();
 
-usuarioRouter.get("/", async (req,res)=>{
+usuarioRouter.get("/",auth, async (req,res)=>{
     const items = await usuarioController.index()
     return res.json(items)
 })
