@@ -1,6 +1,5 @@
 const { Client } = require("pg");
 const bcrypt = require('bcryptjs')
-require (".dotenv-safe").config();
 const jwt = require("jsonwebtoken")
 
 class UsuarioController {
